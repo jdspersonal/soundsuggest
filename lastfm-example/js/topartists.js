@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
 
 /**
  * Appends the top artists for a certain user to the
- * #soundsuggest-content element of the HTML page.
+ * #topartists element of the HTML page.
  * @param {type} user
  * @param {type} limit
  * @returns {undefined}
@@ -30,11 +30,10 @@ function getTopArtists(user, limit) {
     },
     {
         success: function(data) {
-            // Create HTML to append to the #soundsuggest-content element :
+            // Create HTML to append to the #topartists element :
             var list = '<ol>';
-            // for each key <artist> add the active user to the list of related users
             for (var i = 0; i < data.topartists.artist.length; i++) {
-                // Append new element to "#soundsuggest-content"
+                // Append new element to "#topartists"
                 list += '<li>' + data.topartists.artist[i].name + '</li>';
             }
             jQuery(list + '</ol>').appendTo('#topartists');
