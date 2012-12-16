@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
     var user = 'noisedriver';
     var api_key = '828c109e6a54fffedad5177b194f7107';
     var api_secret = '7c2f09e6eb84e8a6183c59e0bc574f70';
-    var cb = 'http://localhost/soundsuggest/lastfm-example/';
+    var cb = window.location;
     var authURL = 'http://www.last.fm/api/auth/?api_key=' + api_key + '&cb=' + cb;
     var token = '';
     var lastfm;
