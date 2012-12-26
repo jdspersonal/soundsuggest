@@ -15,3 +15,16 @@ root {
     display: block;
 }
 
+#chart {
+  font: 10px sans-serif;
+}
+
+.chord path {
+  fill-opacity: .67;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+svg {
+  background: #eee;
+}
