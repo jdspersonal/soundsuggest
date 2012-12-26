@@ -8,7 +8,7 @@
  * </p>
  * <p>
  * This script is based on a JavaScript program
- * by J. Bostock (http://d3js.org/ and https://github.com/mbostock/d3),
+ * by Michael Bostock (http://d3js.org/ and https://github.com/mbostock/d3),
  * which can be found at http://bl.ocks.org/4062006 . For more info on
  * chord diagrams: http://circos.ca/ .
  * </p>
