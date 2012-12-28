@@ -19,9 +19,9 @@ var matrix = [];
 var range = []; // "#000000", "#33585e", "#957244", "#F26223", "#155420"
 var range_artists = [];
 var N = 0;
-var limit = 10;
+var limit = 20;
 var html_string = '';
-var scaling_factor = 25;
+var scaling_factor;
 
 var svg;
 var width = 618;
@@ -114,6 +114,7 @@ function setRange() {
 function buildMatrix() {
 
     N = Object.keys(dataset).length;
+    scaling_factor = N / 2;
 
     // Initialize an NxN matrix : the size is the number of different artists N
     matrix = new Array(N);
@@ -121,36 +122,48 @@ function buildMatrix() {
         matrix[i] = new Array(N);
     }
 
-    // all elements are greater or equal to 1, except on the diagonal they are 0
-    for (var i = 0; i < N; i++) {
-        for (var j = 0; j < N; j++) {
-            if (i != j) {
-                matrix[i][j] = 1;
-            } else {
-                matrix[i][j] = 0;
-            }
-        }
-    }
-
     // Artists i and j that are present in both profiles will
-    // result in matrix[i][j] == 2
+    // result in matrix[i][j] == N / 2
+    // Artists i and j 
     var index1 = 0;
+    var index2 = 0;
     for (var key1 in dataset) {
-        console.log("+checking key == " + key1);
         // Artists that are present in both profiles.
         if (dataset[key1].length == 2) {
-            var index2 = 0;
+            index2 = 0;
             for (var key2 in dataset) {
-                console.log("+----checking key == " + key2);
                 // Artists that are present in both profiles.
                 if ((dataset[key2].length == 2) && (key1 != key2)) {
-                    console.log("|    MATCH : " + key1 + ' and ' + key2);
+                    console.log("@MATCH : " + key1 + ' and ' + key2 + ' value == ' + scaling_factor);
                     matrix[index1][index2] = scaling_factor;
                     console.log(range[index1]);
                     console.log(range[index2]);
                     //$('#navg-' + key1).css('background-color', range[index1]);
                     //$('#navg-' + key2).css('background-color', range[index2]);
+                } else if ((dataset[key2].length == 1) && (key1 != key2)) {
+                    matrix[index1][index2] = 1;
+                } else {
+                    matrix[index1][index2] = 0;
                 }
+                index2++;
+            }
+        } else if (dataset[key1].length == 1) {
+            index2 = 0;
+            for (var key2 in dataset) {
+                // Artists that are present in both profiles.
+                if ((dataset[key2].length == 1) && (key1 != key2) && (dataset[key1][0] == dataset[key2][0])) {
+                   // artists only in one profile
+                   console.log("#MATCH : " + key1 + ' and ' + key2 + ' value == 1');
+                   matrix[index1][index2] = 1;
+                } else {
+                    matrix[index1][index2] = 0;
+                }
+                index2++;
+            }
+        } else {
+            index2 = 0;
+            for (var key2 in dataset) {
+                matrix[index1][index2] = 0;
                 index2++;
             }
         }
