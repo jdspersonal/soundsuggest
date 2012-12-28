@@ -5,7 +5,8 @@
     "description"       : "A simple Google Chrome extension using D3.js and Last.fm API.",
     "background"        :
     {
-        "page" : "background.html"
+        "page"       : "background.html",
+        "persistent" : false
     },
     "content_scripts" :
     [
