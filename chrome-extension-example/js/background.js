@@ -65,7 +65,7 @@ function loadTopArtists(request, sender, sendResponse) {
         console.log("user        : " + request.data.user);
         lastfm.user.getTopArtists({
             user    : request.data.user,
-            limit   : 20
+            limit   : request.data.limit
         }, {
             success : function(data) {
                 for (var i = 0; i < data.topartists.artist.length; i++) {
