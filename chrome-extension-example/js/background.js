@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2012 Joris Schelfaut.
- * 
- * Used for the SoundSuggest project. For more info consult:
- * http://soundsuggest.wordpress.com/ .
- * 
- * -------------------------------------------------------------
+ * Part of the SoundSuggest project. For more info consult:
+ * http://soundsuggest.wordpress.com/ . Written by
+ * Joris Schelfaut.
+ */
+
+/*
  * NOTE : to make this file work, you'll need to change the
  * URL used in "js/lib/lastfm/lastfm.api.js" from
  * http://ws.audioscrobbler.com/2.0/ to https://ws.audioscrobbler.com/2.0/ ,
@@ -13,6 +13,7 @@
  * https://ws.audioscrobbler.com/2.0/; object-src 'self'".
  * 
  */
+
 // LISTENERS :
 // -----------
 /* 

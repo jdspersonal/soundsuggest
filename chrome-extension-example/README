@@ -1,13 +1,16 @@
 Chrome Extension Example Project
 ================================
 
-The application retrieves the Last.fm user that active user is visiting (last.fm/user/*). Then gets the top artists for that user and the top artists for the active user and visualizes similarities in these profiles.
-The Last.fm API can be found at http://www.last.fm/api . The JavaScript library by F. Bruns (http://lastfm.felixbruns.de/javascript-last.fm-api/) is used in this project.
-A chord diagram is created based on a matrix: for each row correspodning to an artist, a link is established using the value of each column corresponding to the other artists. The source code for this visualization is based on a a JavaScript script by Michael Bostock (http://d3js.org/ and https://github.com/mbostock/d3), which can be found at http://bl.ocks.org/4062006 . For more info on chord diagrams: http://circos.ca/ .
-This application is written by Joris Schelfaut. For more info consult http://soundsuggest.wordpress.com/ .
+The application retrieves the Last.fm user that active user is visiting (last.fm/user/*). Then it gets the top artists for that user and the top artists for the active user and visualizes similarities in these profiles.
 
-Usefull links :
----------------
+The Last.fm API can be found at http://www.last.fm/api . The JavaScript library by F. Bruns (http://lastfm.felixbruns.de/javascript-last.fm-api/) is used in this project.
+
+A chord diagram is created based on a matrix: for each row corresponding to an artist, a link is established using the value of each column corresponding to the other artists. The source code for this visualization is based on a a JavaScript script by Michael Bostock (http://d3js.org/ and https://github.com/mbostock/d3), which can be found at http://bl.ocks.org/4062006 . For more info on chord diagrams: http://circos.ca/ .
+
+This application is written by Joris Schelfaut. For more information consult http://soundsuggest.wordpress.com/ .
+
+Useful links :
+--------------
 
 GOOGLE CHROME EXTENSIONS
 ************************
@@ -68,6 +71,9 @@ SOUNDSUGGEST
 
 Website / blog :
 http://soundsuggest.wordpress.com/
+
+Blog post on this Chrome Extension
+http://soundsuggest.wordpress.com/2012/12/28/google-chrome-extensions-example-project/
 
 Github :
 https://github.com/JorisSchelfaut/soundsuggest

@@ -1,36 +1,24 @@
-/**
- * ABOUT THIS SCRIPT :
- * 
- * <p>
- * This script is part of a Google Chrome Extension. It is a content script
- * (http://developer.chrome.com/extensions/content_scripts.html) of a
- * page_action http://developer.chrome.com/extensions/pageAction.html.
- * For more on chrome extensions visit
- * http://developer.chrome.com/extensions/overview.html .
- * </p>
- * 
+/*
+ * Part of the SoundSuggest project. For more info consult:
+ * http://soundsuggest.wordpress.com/ . Written by
+ * Joris Schelfaut.
  */
 
-// Getting the user names :
 var user = document.location.toString().split("user/")[1];
 var active_user = $('#idBadgerUser').attr('href').split("user/")[1];
 var dataset = {};
 var matrix = [];
-var range = []; // "#000000", "#33585e", "#957244", "#F26223", "#155420"
+var range = [];
 var range_artists = [];
 var N = 0;
 var limit = 20;
-var html_string = '';
 var scaling_factor;
-
 var svg;
 var width = 618;
 var height = 550;
 
 chrome_getTopArtists = function(data, callback) {
-    chrome.extension.sendMessage
-    (
-        {
+    chrome.extension.sendMessage({
             action  :   'user.gettopartists',
             data    :   data
         },
@@ -44,21 +32,15 @@ $(document).ready(function() {
 
 function build() {
     $.Deferred(getTopArtists()).promise();
-    $('#recentTracks').append(html_string);
 }
 
 function getTopArtists() {
-
-    // Get the top artists for the visited user
-    chrome_getTopArtists(
-            {
-                user: user,
-                limit: limit
-            },
+    chrome_getTopArtists({
+        user: user,
+        limit: limit
+    },
     function(response1) {
         updateDat(response1, user);
-
-        // Get the artists for the active user
         chrome_getTopArtists(
                 {
                     user: active_user,
@@ -98,9 +80,7 @@ function buildNavigation() {
 function updateDat(response, usr) {
     console.log('user : ' + usr);
     for (var i = 0; i < response.data.topartists.artist.length; i++) {
-        // Log output : see console in google chrome.
-        console.log("response.topartists.artist[" + i + "] = "
-                + response.data.topartists.artist[i].name);
+        console.log("response.topartists.artist[" + i + "] = " + response.data.topartists.artist[i].name);
         if (dataset[response.data.topartists.artist[i].name] == null)
             dataset[response.data.topartists.artist[i].name] = new Array();
         dataset[response.data.topartists.artist[i].name].push(usr);
@@ -126,31 +106,19 @@ function buildMatrix() {
 
     N = Object.keys(dataset).length;
     scaling_factor = N / 2;
-
-    // Initialize an NxN matrix : the size is the number of different artists N
     matrix = new Array(N);
     for (var i = 0; i < N; i++) {
         matrix[i] = new Array(N);
     }
 
-    // Artists i and j that are present in both profiles will
-    // result in matrix[i][j] == N / 2
-    // Artists i and j 
     var index1 = 0;
     var index2 = 0;
     for (var key1 in dataset) {
-        // Artists that are present in both profiles.
         if (dataset[key1].length == 2) {
             index2 = 0;
             for (var key2 in dataset) {
-                // Artists that are present in both profiles.
                 if ((dataset[key2].length == 2) && (key1 != key2)) {
-                    console.log("@MATCH : " + key1 + ' and ' + key2 + ' value == ' + scaling_factor);
                     matrix[index1][index2] = scaling_factor;
-                    console.log(range[index1]);
-                    console.log(range[index2]);
-                    //$('#navg-' + key1).css('background-color', range[index1]);
-                    //$('#navg-' + key2).css('background-color', range[index2]);
                 } else if ((dataset[key2].length == 1) && (key1 != key2)) {
                     matrix[index1][index2] = 1;
                 } else {
@@ -161,10 +129,7 @@ function buildMatrix() {
         } else if (dataset[key1].length == 1) {
             index2 = 0;
             for (var key2 in dataset) {
-                // Artists that are present in both profiles.
                 if ((dataset[key2].length == 1) && (key1 != key2) && (dataset[key1][0] == dataset[key2][0])) {
-                   // artists only in one profile
-                   console.log("#MATCH : " + key1 + ' and ' + key2 + ' value == 1');
                    matrix[index1][index2] = 1;
                 } else {
                     matrix[index1][index2] = 0;
