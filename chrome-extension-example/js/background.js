@@ -48,7 +48,7 @@ var lastfm      = new LastFM({
  */
 function checkForValidUrl(tabId, changeInfo, tab) {
     // Show the page action in the tab if the URL contains 'last.fm' and 'user'
-    if ((tab.url.indexOf('last.fm/') > -1) && (tab.url.indexOf('user/') > -1)) {
+    if (tab.url.indexOf('last.fm/user/') > -1) {
         chrome.pageAction.show(tabId);
     }
 };

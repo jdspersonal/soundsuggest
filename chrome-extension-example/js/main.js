@@ -27,6 +27,17 @@ var svg;
 var width = 618;
 var height = 550;
 
+chrome_getTopArtists = function(data, callback) {
+    chrome.extension.sendMessage
+    (
+        {
+            action  :   'user.gettopartists',
+            data    :   data
+        },
+        callback
+    );
+};
+
 $(document).ready(function() {
     build();
 });
